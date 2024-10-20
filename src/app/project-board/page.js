@@ -44,106 +44,116 @@ export default function ProjectBoard() {
     <div className="bg-white">
       {/* Project Details */}
       <div className="mb-4">
-        <h2 className="text-2xl mb-2">Project Details</h2>
-        <div className="flex gap-4">
-          <div>
-            <label className="block">Project Name:</label>
-            <select
-              className="border p-2"
-              value={selectedProject?.id}
-              onChange={(e) =>
-                setSelectedProject(projects.find(p => p.id === Number(e.target.value)))
-              }
-            >
-              {projects.map((project) => (
-                <option key={project.id} value={project.id}>
-                  {project.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block">Owner:</label>
-            <input
-              type="text"
-              className="border p-2"
-              value={selectedProject?.owner}
-              disabled
-            />
-          </div>
-          <div>
-            <label className="block">Start Date:</label>
-            <input
-              type="text"
-              className="border p-2"
-              value={selectedProject?.startDate}
-              disabled
-            />
-          </div>
-          <div>
-            <label className="block">End Date:</label>
-            <input
-              type="text"
-              className="border p-2"
-              value={selectedProject?.endDate}
-              disabled
-            />
-          </div>
-        </div>
+  <h2 className="text-2xl font-semibold mb-4 text-gray-800">Project Details</h2>
+
+  {/* Card container */}
+  <div className="bg-blue-50 p-6 rounded-lg shadow-md">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Project Name */}
+      <div>
+        <label className="block text-gray-700 font-medium mb-1">Project Name:</label>
+        <select
+          className="border border-gray-300 p-2 text-black rounded w-full focus:outline-none focus:border-blue-500"
+          value={selectedProject?.id}
+          onChange={(e) =>
+            setSelectedProject(projects.find(p => p.id === Number(e.target.value)))
+          }
+        >
+          {projects.map((project) => (
+            <option key={project.id} value={project.id}>
+              {project.name}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* Search Bar */}
+      {/* Owner */}
+      <div>
+        <label className="block text-gray-700 font-medium mb-1">Owner:</label>
+        <input
+          type="text"
+          className="border text-black border-gray-300 p-2 rounded w-full bg-gray-100 cursor-not-allowed"
+          value={selectedProject?.owner}
+          disabled
+        />
+      </div>
+
+      {/* Start Date */}
+      <div>
+        <label className="block  text-gray-700 font-medium mb-1">Start Date:</label>
+        <input
+          type="text"
+          className="border text-black border-gray-300 p-2 rounded w-full bg-gray-100 cursor-not-allowed"
+          value={selectedProject?.startDate}
+          disabled
+        />
+      </div>
+
+      {/* End Date */}
+      <div>
+        <label className="block text-gray-700 font-medium mb-1">End Date:</label>
+        <input
+          type="text"
+          className="border text-black border-gray-300 p-2 rounded w-full bg-gray-100 cursor-not-allowed"
+          value={selectedProject?.endDate}
+          disabled
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+      {/* Filters */}
       <div className="mb-4">
-        <h2 className="text-2xl mb-2">Search Issues</h2>
+  <h2 className="text-2xl mb-2 font-semibold  text-gray-800">Filters</h2>
+  <div className="flex gap-4">
+    {/* Filter by Assignee Dropdown */}
+    <div>
+      <label className="block text-black">Filter by Assignee:</label>
+      <select
+        className="border p-2 border-black text-black rounded-lg"
+        onChange={(e) => setAssigneeFilter(e.target.value)} // Single selection
+      >
+        <option value="" className='text-black'>Select Assignee</option>
+        {/* Dynamically populate assignee options */}
+        {[...new Set(issues.map(issue => issue.assignee))].map(assignee => (
+          <option key={assignee} value={assignee} className='text-black'>
+            {assignee}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    {/* Filter by Priority Dropdown */}
+    <div>
+      <label className="block text-black">Filter by Priority:</label>
+      <select
+        className="border p-2 border-black text-black rounded-lg"
+        onChange={(e) => setPriorityFilter(e.target.value)} // Single selection
+      >
+        <option value="">Select Priority</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+       {/* Search Bar */}
+       <div className="mb-4">
+        <h2 className="text-2xl mb-2 text-black font-semibold  ">Search Issues</h2>
         <input
           type="text"
           placeholder="Search by summary or description..."
-          className="border p-2 w-full"
+          className="border p-2 w-1/2 text-black"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)} // Update search term
         />
       </div>
-
-      {/* Filters */}
-      <div className="mb-4">
-        <h2 className="text-2xl mb-2">Filters</h2>
-        <div className="flex gap-4">
-          {/* Filter by Assignee Dropdown */}
-          <div>
-            <label className="block">Filter by Assignee:</label>
-            <select
-              className="border p-2"
-              onChange={(e) => setAssigneeFilter(e.target.value)}
-            >
-              <option value="">Select Assignee</option>
-              {/* Dynamically populate assignee options */}
-              {[...new Set(issues.map(issue => issue.assignee))].map(assignee => (
-                <option key={assignee} value={assignee}>
-                  {assignee}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Filter by Priority Dropdown */}
-          <div>
-            <label className="block">Filter by Priority:</label>
-            <select
-              className="border p-2"
-              multiple // Enable multi-select
-              onChange={(e) => setPriorityFilter(
-                Array.from(e.target.selectedOptions, option => option.value)
-              )}
-            >
-              <option value="">Select Priority</option>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
       {/* Issue Board */}
       <div className="mb-4">
   <h2 className="text-2xl mb-2 text-black">All Issues</h2>
