@@ -15,14 +15,14 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#053576]">
       {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} onClose={handleSidebarClose} />
 
       {/* Main content area */}
       <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} md:ml-64`}>
         <Header onMenuClick={handleMenuClick} />
-        <main className="p-4 bg-slate-500 flex-1">{children}</main> {/* Ensure children are rendered */}
+        <main className="p-4 bg-white flex-1 h-screen">{children}</main> {/* Ensure children are rendered */}
       </div>
     </div>
   );

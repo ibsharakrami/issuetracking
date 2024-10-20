@@ -1,12 +1,19 @@
 "use client";
+import Image from 'next/image';
 import Link from 'next/link';
 import { HiMenuAlt3 } from 'react-icons/hi'; // Import menu icon
 
 export default function Header({ onMenuClick }) {
   return (
-    <header className="flex justify-between items-center bg-gray-800 text-white p-4">
-      <div className="text-lg font-bold">
-        <Link href="/">Logo</Link>
+    <header className="flex justify-between items-center bg-[#053576] text-white p-4">
+      <div className="text-lg font-bold ">
+        <Link href="/"><Image
+          src={'/images/ISS.png'}
+
+          width={100}
+          height={40}
+          className='md:hidden'
+        /></Link>
       </div>
       {/* Search bar (optional) */}
       <div className="hidden md:block w-1/3">
