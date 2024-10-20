@@ -2,14 +2,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { HiMenuAlt3 } from 'react-icons/hi'; // Import menu icon
+import { useState } from 'react';
 
-export default function Header({ onMenuClick }) {
+export default function Header({ onMenuClick, onSearchChange }) {
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearchInputChange = (e) => {
+    setSearchValue(e.target.value);
+    onSearchChange(e.target.value); // Pass search value to Layout
+    console.log('Search Input Changed:', e.target.value);
+  };
+
   return (
     <header className="flex justify-between items-center bg-[#053576] text-white p-4">
       <div className="text-lg font-bold ">
         <Link href="/"><Image
           src={'/images/ISS.png'}
-
           width={100}
           height={40}
           className='md:hidden'
@@ -20,6 +28,8 @@ export default function Header({ onMenuClick }) {
         <input
           type="text"
           placeholder="Search..."
+          value={searchValue}
+          onChange={handleSearchInputChange}
           className="w-full p-2 rounded bg-gray-700 border border-gray-600"
         />
       </div>
@@ -43,3 +53,4 @@ export default function Header({ onMenuClick }) {
     </header>
   );
 }
+
