@@ -30,16 +30,19 @@ export default function Header({ onMenuClick, onSearchChange }) {
           placeholder="Search..."
           value={searchValue}
           onChange={handleSearchInputChange}
-          className="w-full p-2 rounded bg-gray-700 border border-gray-600"
+          className="w-full p-2 rounded-xl  border border-gray-600 bg-slate-50"
         />
       </div>
       <div className="flex items-center space-x-4">
         {/* Profile icon */}
         <div className="hidden md:block">
           <Link href="/profile">
-            <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
-              P {/* First letter of profile */}
-            </div>
+          <Image
+          src={'/images/pro.png'}
+          width={50}
+          height={50}
+
+        />
           </Link>
         </div>
         {/* Menu button */}

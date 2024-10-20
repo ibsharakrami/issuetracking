@@ -175,8 +175,10 @@ export default function ProjectBoard() {
                   ${category === 'Completed' ? 'bg-gray-100' : ''}`}
               >
                 <h4 className="font-bold truncate text-black">{issue.title}</h4>
-                <p className="truncate text-black">{issue.description}</p>
-                <p className='text-black'>Assignee: {issue.assignee}</p>
+                <p className=" text-black">{issue.description}</p>
+                <div className='flex flex-row justify-between items-center mt-2'>
+
+                <p className='text-black font-bold'>{issue.assignee}</p>
                 <p
                   className={`inline-block px-2 py-1 rounded text-white font-semibold
                     ${issue.priority === 'High' ? 'bg-red-500' : ''}
@@ -185,6 +187,7 @@ export default function ProjectBoard() {
                 >
                   {issue.priority}
                 </p>
+                </div>
               </div>
             ))}
         </div>
